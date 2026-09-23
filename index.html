@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shaun Yim — Portfolio</title>
+<meta name="description" content="Shaun Yim — IT professional building cloud-integrated, automation-driven, and AI-assisted applications. Portfolio of projects, experience, and skills.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="description" content="Shaun Yim — IT professional building cloud-integrated, automation-driven, and AI-assisted applications. Portfolio of projects, experience, and skills.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -454,9 +455,11 @@
             <div class="ti-date">Jun 2025 – Aug 2025</div>
           </div>
           <ul class="ti-list">
-            <li>Maintained and debugged a Python-based dynamic pricing system for refurbished electronics listed on Backmarket.com across multiple country markets, inheriting undocumented code from departed engineers.</li>
-            <li>Fixed and extended automated repricing bots that monitored competitor listings and adjusted prices in real time to win marketplace buy-box placement.</li>
-            <li>Diagnosed and resolved backend infrastructure issues, including MongoDB connection limits, Redis connectivity failures, and Telegram-based bot notification outages.</li>
+            <li>Maintained and debugged a Python-based dynamic pricing system for refurbished electronics listed on Backmarket.com across multiple country markets, inheriting undocumented code from departed engineers with no handover notes.</li>
+            <li>Traced pricing logic through country-specific repricing bots (separate scripts per market, e.g. Germany and Italy) to understand existing behavior before making changes, then fixed and extended those bots so they kept monitoring competitor listings and adjusting prices in real time to win marketplace buy-box placement.</li>
+            <li>Diagnosed and resolved backend infrastructure issues, including MongoDB connection limits, Redis connectivity failures, and Telegram-based bot notification outages that were silently breaking price-update alerts.</li>
+            <li>Configured static IP addressing for the scraper and bot processes to keep automated requests to Backmarket stable and reduce the risk of rate-limiting or IP-based blocks.</li>
+            <li>Worked largely independently against a live production system — any bug meant real listings mispriced on a live marketplace — which pushed me to verify changes carefully before deploying.</li>
           </ul>
         </div>
         <div class="timeline-item">
@@ -469,8 +472,9 @@
           </div>
           <ul class="ti-list">
             <li>Supported and updated over 10 software programs at ITE West, collaborating with the IT team to complete system upgrades that enhanced performance and security.</li>
-            <li>Assisted in troubleshooting technical issues for 100+ users, reducing downtime by 15%.</li>
-            <li>Gained hands-on experience with system integration and network management in a real-world educational environment.</li>
+            <li>Assisted in troubleshooting technical issues for 100+ users, reducing downtime by 15% through faster first-response and more consistent fix documentation.</li>
+            <li>Noted down recurring issues and their fixes to help the wider team resolve similar tickets faster, rather than re-diagnosing the same problem each time.</li>
+            <li>Gained hands-on experience with system integration and network management in a real-world educational environment, working alongside full-time engineers rather than in an isolated intern track.</li>
           </ul>
         </div>
       </div>
@@ -497,9 +501,11 @@
           </div>
           <div class="pc-sub">Solo developer · Prototype</div>
           <ul class="pc-list">
-            <li>Independently built the full technical stack — auth, database, storefront, and checkout — for a blind-box bracelet e-commerce concept.</li>
-            <li>Developed a custom PayNow QR payment integration as a serverless Deno function, generating EMV-compliant payloads with CRC16 checksum validation and server-side price checks to prevent client-side tampering.</li>
-            <li>Gained hands-on experience in secure payment system design, serverless backend architecture, and owning full technical direction within a small founding team.</li>
+            <li>Independently built the full technical stack — auth, database, storefront, and checkout — for a blind-box bracelet e-commerce concept, from the Postgres schema through the checkout flow customers actually use.</li>
+            <li>Set up authentication with Supabase Auth and JWT verification, and designed the order lifecycle (cart → checkout → payment → confirmation) around a single orders table so every purchase stays traceable end to end.</li>
+            <li>Developed a custom PayNow QR payment integration as a serverless Deno function, hand-constructing EMV-compliant payloads with CRC16-CCITT checksum validation rather than relying on a paid payment gateway.</li>
+            <li>Kept pricing server-side in a fixed SKU price table inside the Deno function, so the amount encoded in the QR code is always recalculated from the order contents rather than trusted from the client — closing off a client-side tampering path.</li>
+            <li>Built a lightweight admin view for order management (list + order detail) to manually confirm PayNow payments, since automated bank reconciliation wasn't realistic for a small-scale launch — and picked up a lot about secure payment design and owning full technical direction within a small founding team along the way.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">Supabase</span><span class="tag">JavaScript</span><span class="tag">Deno / TS</span><span class="tag">PostgreSQL</span>
@@ -517,9 +523,11 @@
           </div>
           <div class="pc-sub">Team of 5 · SIM-UOL CSSC Hackathon</div>
           <ul class="pc-list">
-            <li>Built user authentication and session-based data storage for a Flask-based chatbot addressing diet misinformation.</li>
-            <li>Implemented an image-to-pantry feature using the OpenAI Vision API to detect food items from user-uploaded photos and log them as tracked ingredients.</li>
-            <li>Built a GPT-powered recipe generator that suggested recipes based on ingredients in the user's pantry.</li>
+            <li>Built user authentication and session-based data storage for a Flask-based chatbot addressing diet misinformation, including a profile setup flow that computes BMI and an estimated daily calorie target from age, height, weight, and gender.</li>
+            <li>Wrote the prompt-engineering layer for GPT-3.5-turbo: injected the user's stored profile into each request so nutrition advice was personalized, and constrained the model with system-level instructions to stay on nutrition/health topics and decline unrelated questions.</li>
+            <li>Implemented an image-to-pantry feature using the OpenAI Vision API to detect food items from user-uploaded photos and log them as tracked ingredients, feeding a "current ingredients" list the user could build up over time.</li>
+            <li>Built a GPT-powered recipe generator that suggested recipes based on ingredients already sitting in the user's pantry, closing the loop from "what do I have" to "what can I cook."</li>
+            <li>Added a weight-journey feature with a Chart.js progress graph and simple achievement badges, so logging a check-in gave the user immediate visual feedback rather than just a stored number.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">Flask</span><span class="tag">OpenAI API</span><span class="tag">JavaScript</span>
@@ -600,9 +608,10 @@
           </div>
           <div class="pc-sub">Final Year Project · Nanyang Polytechnic</div>
           <ul class="pc-list">
-            <li>Web-based application for the SAF to manage military equipment loans and monitor stock levels.</li>
+            <li>Web-based application for the SAF to manage military equipment loans and monitor stock levels, replacing a manual, paper-driven tracking process.</li>
             <li>Developed a responsive front-end with React.js, MUI, HTML, CSS, and JavaScript, including dashboard features for mobile responsiveness, data visualization, and transaction management.</li>
-            <li>Gained hands-on experience in software testing, debugging, and state management within a team setting.</li>
+            <li>Collaborated with a small team, splitting frontend and backend work and testing across devices so the dashboard degraded gracefully on smaller screens rather than just working on desktop.</li>
+            <li>Gained hands-on experience in software testing, debugging, and state management within a team setting — including handling the messier edge cases (partial returns, overdue loans, stock discrepancies) that don't show up until real usage.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">React.js</span><span class="tag">MUI</span><span class="tag">JavaScript</span>
