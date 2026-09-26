@@ -490,6 +490,88 @@
     </div>
     <section>
       <div class="project-grid">
+        <div class="project-card" id="project-stockwatcher">
+          <div class="pc-illustration" role="img" aria-label="Illustration of a rising stock price chart feeding into a chat panel that shows a sourced answer tagged with news and filing labels">
+            <svg viewBox="0 0 640 274" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="555" cy="58" r="95" fill="var(--accent-ink)" opacity="0.55"/>
+              <circle cx="95" cy="235" r="60" fill="var(--accent-2-ink)" opacity="0.45"/>
+
+              <!-- price chart axis -->
+              <g stroke="var(--border)" stroke-width="2.5" fill="none" stroke-linecap="round">
+                <line x1="34" y1="70" x2="34" y2="238"/>
+                <line x1="34" y1="238" x2="300" y2="238"/>
+              </g>
+
+              <!-- price trend area + line -->
+              <path d="M50 205 L82 218 L114 182 L146 195 L178 150 L210 165 L242 112 L274 128 L296 92 L296 238 L50 238 Z" fill="var(--accent)" opacity="0.08"/>
+              <path d="M50 205 L82 218 L114 182 L146 195 L178 150 L210 165 L242 112 L274 128 L296 92" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- data points -->
+              <g fill="var(--surface)" stroke="var(--accent)" stroke-width="2.5">
+                <circle cx="82" cy="218" r="4"/>
+                <circle cx="146" cy="195" r="4"/>
+                <circle cx="210" cy="165" r="4"/>
+                <circle cx="274" cy="128" r="4"/>
+              </g>
+              <circle cx="296" cy="92" r="6" fill="var(--accent)" stroke="var(--surface)" stroke-width="2.5"/>
+
+              <!-- connecting flow dots -->
+              <g fill="var(--text-2)" opacity="0.5">
+                <circle cx="320" cy="150" r="3"/>
+                <circle cx="340" cy="146" r="3"/>
+                <circle cx="360" cy="142" r="3"/>
+              </g>
+
+              <!-- chat / answer panel -->
+              <rect x="392" y="46" width="152" height="188" rx="12" fill="var(--surface)" stroke="var(--border)" stroke-width="2.5"/>
+              <rect x="416" y="36" width="104" height="18" rx="5" fill="var(--surface)" stroke="var(--border)" stroke-width="2.5"/>
+
+              <!-- answer checkmark + text lines -->
+              <g stroke-width="2.5" stroke-linecap="round" fill="none">
+                <rect x="410" y="70" width="16" height="16" rx="4" fill="var(--accent)" stroke="var(--accent)"/>
+                <path d="M414 78l3 3 6-7" stroke="var(--accent-ink)"/>
+                <line x1="436" y1="78" x2="518" y2="78" stroke="var(--text-2)" opacity="0.5"/>
+                <line x1="410" y1="100" x2="490" y2="100" stroke="var(--text-2)" opacity="0.35"/>
+                <line x1="410" y1="114" x2="470" y2="114" stroke="var(--text-2)" opacity="0.35"/>
+              </g>
+
+              <!-- source tags: news + filing -->
+              <g>
+                <rect x="410" y="140" width="58" height="22" rx="6" fill="var(--accent-ink)"/>
+                <rect x="474" y="140" width="58" height="22" rx="6" fill="var(--accent-2-ink)"/>
+              </g>
+              <g stroke-linecap="round" stroke-width="2">
+                <line x1="420" y1="151" x2="458" y2="151" stroke="var(--accent)" opacity="0.6"/>
+                <line x1="484" y1="151" x2="522" y2="151" stroke="var(--accent-2)" opacity="0.6"/>
+              </g>
+
+              <!-- similarity ranking bars -->
+              <g>
+                <rect x="410" y="196" width="12" height="18" rx="3" fill="var(--accent)" opacity="0.45"/>
+                <rect x="428" y="188" width="12" height="26" rx="3" fill="var(--accent)" opacity="0.65"/>
+                <rect x="446" y="180" width="12" height="34" rx="3" fill="var(--accent)" opacity="0.85"/>
+                <rect x="464" y="172" width="12" height="42" rx="3" fill="var(--accent)"/>
+              </g>
+            </svg>
+            <span class="pc-illustration-caption">Illustration — runs locally, no public deploy yet</span>
+          </div>
+          <div class="pc-top">
+            <div class="pc-title">Stock Watcher — RAG Chatbot for Market Data</div>
+            <div class="pc-date">Sep 2026</div>
+          </div>
+          <div class="pc-sub">Solo developer · Personal project</div>
+          <ul class="pc-list">
+            <li>Built a Flask app that answers natural-language questions about a stock watchlist using retrieval-augmented generation, grounded only in retrieved data rather than the model's general knowledge.</li>
+            <li>Combined three data sources into one searchable index: live prices via yfinance, recent headlines from Google News RSS, and extracted Risk Factors / MD&amp;A sections pulled directly from companies' SEC 10-K filings on EDGAR.</li>
+            <li>Implemented incremental indexing with OpenAI embeddings so adding one new ticker embeds only its new content instead of rebuilding the whole index, keeping ongoing API costs negligible.</li>
+            <li>Added file-locking around every shared read-modify-write and per-route rate limiting on the endpoints that call the OpenAI API, guarding against race conditions and runaway API costs from a stuck request.</li>
+            <li>Wrote a pytest suite covering the pure logic (RSS parsing, HTML cleanup, filing text chunking, ticker/alias detection) against mocked feed data, and prompted the model to explicitly admit when retrieved context isn't enough rather than guess.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Flask</span><span class="tag">OpenAI API</span><span class="tag">RAG</span><span class="tag">SEC EDGAR</span><span class="tag">yfinance</span><span class="tag">pytest</span>
+          </div>
+        </div>
+
         <div class="project-card" id="project-loopd">
           <div class="pc-media">
             <button type="button" data-lightbox="images/loopd_checkout.jpg" data-caption="LOOP'd — checkout with PayNow QR"><img src="images/loopd_checkout.jpg" alt="LOOP'd checkout page with PayNow QR code generated for payment" loading="lazy"></button>
