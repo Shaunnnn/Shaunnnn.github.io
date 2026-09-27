@@ -574,13 +574,15 @@
             <div class="pc-title">Nutrition Chatbot</div>
             <div class="pc-date">Nov 2025</div>
           </div>
-          <div class="pc-sub">Team of 5 · SIM-UOL CSSC Hackathon</div>
+          <div class="pc-sub">Team of 5 · SIM-UOL CSSC Hackathon → ongoing solo project</div>
           <ul class="pc-list">
             <li>Built user authentication and session-based data storage for a Flask-based chatbot addressing diet misinformation, including a profile setup flow that computes BMI and an estimated daily calorie target from age, height, weight, and gender.</li>
             <li>Wrote the prompt-engineering layer for GPT-3.5-turbo: injected the user's stored profile into each request so nutrition advice was personalized, and constrained the model with system-level instructions to stay on nutrition/health topics and decline unrelated questions.</li>
             <li>Implemented an image-to-pantry feature using the OpenAI Vision API to detect food items from user-uploaded photos and log them as tracked ingredients, feeding a "current ingredients" list the user could build up over time.</li>
             <li>Built a GPT-powered recipe generator that suggested recipes based on ingredients already sitting in the user's pantry, closing the loop from "what do I have" to "what can I cook."</li>
             <li>Added a weight-journey feature with a Chart.js progress graph and simple achievement badges, so logging a check-in gave the user immediate visual feedback rather than just a stored number.</li>
+            <li>Continued building solo after the hackathon: turned meal-photo analysis into a confirm-before-log flow, so the bot estimates the dish and calories from a photo and asks before adding it to the food log, instead of assuming every photo means a meal was eaten.</li>
+            <li>Added GPT-based calorie estimation for manually logged meals with no label to go on &mdash; flagged as "(averaged)" in the log so it's never mistaken for a measured value &mdash; plus a weekly insights view summarizing weight change and average calories with a short GPT-phrased check-in.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">Flask</span><span class="tag">OpenAI API</span><span class="tag">JavaScript</span>
