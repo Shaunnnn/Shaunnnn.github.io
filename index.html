@@ -207,6 +207,27 @@
   .pc-media button:hover img{ transform:scale(1.04); }
   .pc-media button:focus-visible{ outline:2px solid var(--accent); outline-offset:-2px; }
 
+  /* ---- horizontal-scrolling project media (more than 2 shots, card height stays fixed) ---- */
+  .pc-media-wrap{ position:relative; margin-bottom:20px; border-radius:12px; }
+  .pc-media-wrap.has-scroll::after{
+    content:''; position:absolute; top:0; right:0; bottom:0; width:40px;
+    background:linear-gradient(to right, transparent, var(--surface) 82%);
+    pointer-events:none; border-radius:0 12px 12px 0;
+    opacity:1; transition:opacity .2s ease;
+  }
+  .pc-media-wrap.has-scroll.at-end::after{ opacity:0; }
+  .pc-media--scroll{
+    display:flex; margin-bottom:0; overflow-x:auto; overflow-y:hidden; gap:10px;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin; scrollbar-color:var(--accent) var(--surface-2);
+  }
+  .pc-media--scroll::-webkit-scrollbar{ height:6px; }
+  .pc-media--scroll::-webkit-scrollbar-track{ background:var(--surface-2); }
+  .pc-media--scroll::-webkit-scrollbar-thumb{ background:var(--accent); border-radius:8px; }
+  .pc-media--scroll button{ flex:0 0 calc(46% - 5px); scroll-snap-align:start; }
+  @media (max-width:640px){ .pc-media--scroll button{ flex:0 0 82%; } }
+  .pc-media--scroll:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
   /* ---- lightbox ---- */
   .lightbox{
     position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center;
@@ -513,9 +534,12 @@
         </div>
 
         <div class="project-card" id="project-loopd">
-          <div class="pc-media">
-            <button type="button" data-lightbox="images/loopd_home.jpg" data-caption="LOOP'd — homepage"><img src="images/loopd_home.jpg" alt="LOOP'd homepage showing the shop grid with live stock counts" loading="lazy"></button>
-            <button type="button" data-lightbox="images/loopd_checkout.jpg" data-caption="LOOP'd — checkout with PayNow QR"><img src="images/loopd_checkout.jpg" alt="LOOP'd checkout page with PayNow QR code generated for payment" loading="lazy"></button>
+          <div class="pc-media-wrap has-scroll">
+            <div class="pc-media pc-media--scroll" tabindex="0" aria-label="LOOP'd screenshots — scroll to see more">
+              <button type="button" data-lightbox="images/loopd_home.jpg" data-caption="LOOP'd — homepage"><img src="images/loopd_home.jpg" alt="LOOP'd homepage showing the shop grid with live stock counts" loading="lazy"></button>
+              <button type="button" data-lightbox="images/loopd_shopgrid.jpg" data-caption="LOOP'd — shop grid"><img src="images/loopd_shopgrid.jpg" alt="LOOP'd shop grid showing live stock counts for each blind box series" loading="lazy"></button>
+              <button type="button" data-lightbox="images/loopd_checkout.jpg" data-caption="LOOP'd — checkout with PayNow QR"><img src="images/loopd_checkout.jpg" alt="LOOP'd checkout page with PayNow QR code generated for payment" loading="lazy"></button>
+            </div>
           </div>
           <div class="pc-top">
             <div class="pc-title">LOOP'd — E-Commerce Platform</div>
@@ -884,6 +908,28 @@
       if(e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
     });
   })();
+
+  // ---- horizontal-scroll project media: fade the edge hint once fully scrolled ----
+  document.querySelectorAll('.pc-media-wrap.has-scroll').forEach(function(wrap){
+    var track = wrap.querySelector('.pc-media--scroll');
+    if(!track) return;
+    function updateFade(){
+      // clientWidth is 0 while this section/tab isn't laid out yet (this site
+      // swaps sections in and out) — skip that case instead of reading it as
+      // "already scrolled to the end", which would hide the hint before the
+      // person ever sees the card.
+      if(track.clientWidth === 0) return;
+      var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      wrap.classList.toggle('at-end', atEnd);
+    }
+    track.addEventListener('scroll', updateFade, { passive: true });
+    if(window.ResizeObserver){
+      new ResizeObserver(updateFade).observe(track);
+    } else {
+      window.addEventListener('resize', updateFade);
+    }
+    updateFade();
+  });
 
   document.querySelectorAll('.copy-btn').forEach(function(btn){
     btn.addEventListener('click', async function(){
