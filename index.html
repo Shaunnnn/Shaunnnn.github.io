@@ -159,7 +159,8 @@
   .page-intro .lede{ margin-top:10px; }
 
   /* ---- home teaser cards ---- */
-  .teaser-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px; }
+  .teaser-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:18px; }
+  @media (max-width:900px){ .teaser-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:640px){ .teaser-grid{ grid-template-columns:1fr; } }
   .teaser-card{
     background:var(--surface); border:1px solid var(--border); border-radius:14px;
@@ -415,6 +416,11 @@
       <div class="eyebrow mono">// featured</div>
       <h2>A few things I've built</h2>
       <div class="teaser-grid">
+        <a href="#projects" data-page-link="projects" class="teaser-card">
+          <span class="tc-label">Oct 2026</span>
+          <span class="tc-title">Javis</span>
+          <span class="tc-desc">AI interview coach with a live voice interviewer, built with Next.js and Gemini.</span>
+        </a>
         <a href="#projects" data-page-link="projects" class="teaser-card">
           <span class="tc-label">Dec 2025 – Present</span>
           <span class="tc-title">LOOP'd</span>
@@ -761,7 +767,7 @@
             <span class="skill-tag">AWS</span><span class="skill-tag">Terraform</span><span class="skill-tag">Supabase</span><span class="skill-tag">Flask</span>
             <span class="skill-tag">Serverless Functions</span><span class="skill-tag">SQL (PostgreSQL)</span>
             <span class="skill-tag">NoSQL</span><span class="skill-tag">API Development &amp; Integration</span>
-            <span class="skill-tag">Full-Stack Development</span>
+            <span class="skill-tag">Full-Stack Development</span><span class="skill-tag">Next.js / React</span>
           </div>
         </div>
         <div class="skill-group">
@@ -769,7 +775,7 @@
           <div class="skill-tags">
             <span class="skill-tag">OpenAI API / LLM Integration</span><span class="skill-tag">n8n / Workflow Automation</span>
             <span class="skill-tag">Prompt Engineering</span><span class="skill-tag">Computer Vision (OpenAI Vision API)</span>
-            <span class="skill-tag">Retrieval-Augmented Generation (RAG)</span>
+            <span class="skill-tag">Retrieval-Augmented Generation (RAG)</span><span class="skill-tag">Gemini API</span><span class="skill-tag">Speech-to-Text / Text-to-Speech</span><span class="skill-tag">Face Tracking (MediaPipe)</span>
           </div>
         </div>
         <div class="skill-group">
