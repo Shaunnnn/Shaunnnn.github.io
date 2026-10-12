@@ -537,6 +537,36 @@
     </div>
     <section>
       <div class="project-grid">
+        <div class="project-card" id="project-javis">
+          <div class="pc-media-wrap has-scroll">
+            <div class="pc-media pc-media--scroll" tabindex="0" aria-label="Javis screenshots — scroll to see more">
+              <button type="button" data-lightbox="images/javis_call.jpg" data-caption="Javis — live mock interview with the AI core (sample data)"><img src="images/javis_call.jpg" alt="Javis video-call interview screen with a glowing 3D AI core listening to the candidate" loading="lazy"></button>
+              <button type="button" data-lightbox="images/javis_report.jpg" data-caption="Javis — scored interview report (sample data)"><img src="images/javis_report.jpg" alt="Javis interview report showing an overall score of 77, strengths, improvements and a question-by-question breakdown" loading="lazy"></button>
+              <button type="button" data-lightbox="images/javis_questions.jpg" data-caption="Javis — tailored practice questions with key points (sample data)"><img src="images/javis_questions.jpg" alt="Javis question list with filters, key points and a model answer for each tailored question" loading="lazy"></button>
+              <button type="button" data-lightbox="images/javis_home.jpg" data-caption="Javis — home screen (sample data)"><img src="images/javis_home.jpg" alt="Javis home screen showing the glowing AI core and the prepare, interview and review steps" loading="lazy"></button>
+              <button type="button" data-lightbox="images/javis_analysis.jpg" data-caption="Javis — resume vs role analysis (sample data)"><img src="images/javis_analysis.jpg" alt="Javis analysis page comparing the candidate's experience and skills against the role requirements and gaps" loading="lazy"></button>
+            </div>
+          </div>
+          <div class="pc-top">
+            <div class="pc-title">Javis &mdash; AI Interview Coach</div>
+            <div class="pc-date">Oct 2026</div>
+          </div>
+          <div class="pc-sub">Solo developer &middot; Personal project</div>
+          <ul class="pc-list">
+            <li>Built a Next.js web app that turns a resume (PDF or photo) and a job posting (link or screenshot) into tailored interview prep: Gemini builds a profile of strengths, role requirements and gaps, then streams batches of questions, each with key points, a model answer and tips.</li>
+            <li>Built a live voice interviewer, &ldquo;Javis&rdquo;, who speaks, listens and decides after each answer whether to follow up, move on, repeat the question or wrap up, in a style the user picks (friendly, neutral or tough). Voice runs in the browser with Kokoro text-to-speech inside a Web Worker; answers are captured with speech recognition in Chrome, or recorded audio sent to the model in Safari.</li>
+            <li>Enabled cross-origin isolation (COOP/COEP headers) so the voice model could use multi-threaded WebAssembly, making speech generation several times faster, and removed mid-sentence pauses by chunking text, trimming silence and adapting to how fast each device can generate audio.</li>
+            <li>Added in-browser face tracking (MediaPipe) to score eye contact, look-aways and steadiness, plus speech pace, filler words and answer length. These combine with a five-criteria content score into a report with a better version of the weakest answer, an eye-contact chart and a transcript replay. Video never leaves the device.</li>
+            <li>Built Javis&rsquo;s animated 3D &ldquo;AI core&rdquo; with three.js and React Three Fiber: a custom fresnel shader, bloom, and a glow that follows his voice while his eyes follow the user&rsquo;s face.</li>
+            <li>Designed a resilient AI layer: a single server route so the API key never reaches the browser, prompts kept as separate files that treat uploaded content as data to resist prompt injection, JSON-schema output, and a model fallback chain (Gemini Flash-Lite, Flash and Pro, with Groq as backup) with timeouts and retries. Job-link fetching is protected against SSRF.</li>
+            <li>Kept all user data in the browser (localStorage) with a one-click &ldquo;delete all my data&rdquo;, and deployed on Vercel.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">Gemini API</span><span class="tag">three.js</span><span class="tag">MediaPipe</span><span class="tag">Web Workers</span><span class="tag">Web Audio</span><span class="tag">Vercel</span>
+          </div>
+          <a class="pc-repo-link" href="https://github.com/Shaunnnn/javis" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> View on GitHub</a>
+        </div>
+
         <div class="project-card" id="project-stockwatcher">
           <div class="pc-media">
             <button type="button" data-lightbox="images/stockwatcher_dashboard.jpg" data-caption="Stock Watcher — live watchlist dashboard"><img src="images/stockwatcher_dashboard.jpg" alt="Stock Watcher dashboard showing live prices for AAPL, MSFT, TSLA, NVDA, AMZN, and QQQM with a scrolling ticker banner" loading="lazy"></button>
